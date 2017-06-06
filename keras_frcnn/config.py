@@ -12,10 +12,10 @@ class Config:
         self.random_rotate_scale = 180.
 
 		# anchor box scales
-        self.anchor_box_scales = [128, 256, 512]
+        self.anchor_box_scales = [64,128, 256, 512]
 
 		# anchor box ratios
-        self.anchor_box_ratios = [[1, 1], [1, 2], [2, 1]]
+        self.anchor_box_ratios = [[1, 1], [1, 2], [2, 1],[0.25,1],[1,0.25],[0.5,1.5],[1.5,0.5]]
 
 		# size to resize the smallest side of the image
         self.im_size = 600
