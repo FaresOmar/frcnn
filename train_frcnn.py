@@ -12,7 +12,7 @@ C.use_vertical_flips = True
 C.use_horizontal_flips = True
 C.scale_augment = True
 C.rot_90 = True
-C.balanced_classes = True
+C.balanced_classes = False
 
 C2 = config.Config()
 C2.num_rois = 6
@@ -98,7 +98,7 @@ model.compile(optimizer=adam, loss=[losses.rpn_loss_cls(num_anchors), losses.rpn
 
 nb_epochs = 60
 
-callbacks = [EarlyStopping(monitor='val_loss', patience=20, verbose=0),
+callbacks = [EarlyStopping(monitor='val_loss', patience=15, verbose=0),
 				ModelCheckpoint(C.model_path, monitor='val_loss', save_best_only=True, verbose=0),
 			 ReduceLROnPlateau(monitor='loss', factor=0.1, patience=5, min_lr=1e-7, verbose=1)]
 train_samples_per_epoch = len(train_imgs)  #len(train_imgs)
@@ -109,7 +109,7 @@ print('Starting training')
 
 weights_path = 'D:/Collage courses/GP/Ayman-frcnn/Fishy-master/notbook/model_frcnn.hdf5'
 
-model.load_weights(weights_path, by_name=True)
+#model.load_weights(weights_path, by_name=True)
 model.fit_generator(data_gen_train, steps_per_epoch=train_samples_per_epoch, epochs= nb_epochs,
 					validation_data=data_gen_val, validation_steps=nb_val_samples, callbacks=callbacks,
 					max_q_size=1, workers=1)
